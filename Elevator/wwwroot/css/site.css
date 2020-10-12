@@ -1,71 +1,48 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.container{
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.inside-control {
+    float: left;
+    width: 25%;
+    height: 100%;
+    position: relative;
 }
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.top{
+    width: 100%;
+    height: 60%;
 }
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
+.bottom {
+    width: 100%;
+    height: 40%;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.Lift {
+    float: left;
+    width: 50%;
+    height: 100%;
+    position: relative;
 }
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
+.Lift-Body {
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    background: black;
 }
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.outside-floors {
+    float: left;
+    width: 25%;
+    height: 100%;
+    position: relative;
 }
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+.Floor {
+    width: 80%;
+    height: 10px;
+    margin: 50px auto;
+    background: green;
 }

@@ -10,7 +10,8 @@ namespace Elevator.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var totalFloorCount = 5;
+            return View(totalFloorCount);
         }
     }
 }
