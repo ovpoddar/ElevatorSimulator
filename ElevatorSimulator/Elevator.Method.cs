@@ -7,7 +7,7 @@ namespace ElevatorSimulator
 {
     partial class Elevator
     {
-        private void InitializeFunction()
+        private void InitializeMethod()
         {
             var follrButtons = InsideControls.Controls;
             foreach (var button in follrButtons)

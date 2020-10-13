@@ -13,7 +13,7 @@ namespace ElevatorSimulator
         public Elevator()
         {
             InitializeComponent();
-            InitializeFunction();
+            InitializeMethod();
         }
 
         private void Btn_Click(object sender, System.EventArgs e)
