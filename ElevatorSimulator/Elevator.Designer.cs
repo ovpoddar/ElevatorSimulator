@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace ElevatorSimulator
+﻿namespace ElevatorSimulator
 {
     partial class Elevator
     {
@@ -30,132 +28,156 @@ namespace ElevatorSimulator
         /// </summary>
         private void InitializeComponent()
         {
-            this.Inside = new System.Windows.Forms.Panel();
-            this.InsideControls = new System.Windows.Forms.FlowLayoutPanel();
-            this.Floors = new System.Windows.Forms.Panel();
-            this.Lift = new System.Windows.Forms.Panel();
-            this.BtnP = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LiftInside = new System.Windows.Forms.FlowLayoutPanel();
+            this.Btn0 = new System.Windows.Forms.Button();
             this.Btn1 = new System.Windows.Forms.Button();
+            this.Btn2 = new System.Windows.Forms.Button();
             this.Btn3 = new System.Windows.Forms.Button();
-            this.Btn4 = new System.Windows.Forms.Button();
-            this.Btn5 = new System.Windows.Forms.Button();
-            this.Inside.SuspendLayout();
-            this.InsideControls.SuspendLayout();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.DynamicFloorHolder = new System.Windows.Forms.FlowLayoutPanel();
+            this.BottomFloorHolder = new System.Windows.Forms.FlowLayoutPanel();
+            this.TopFloorHolder = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1.SuspendLayout();
+            this.LiftInside.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Inside
+            // panel1
             // 
-            this.Inside.Controls.Add(this.InsideControls);
-            this.Inside.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Inside.Location = new System.Drawing.Point(0, 0);
-            this.Inside.Name = "Inside";
-            this.Inside.Size = new System.Drawing.Size(124, 536);
-            this.Inside.TabIndex = 0;
+            this.panel1.Controls.Add(this.LiftInside);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(108, 517);
+            this.panel1.TabIndex = 0;
             // 
-            // InsideControls
+            // LiftInside
             // 
-            this.InsideControls.Controls.Add(this.Btn5);
-            this.InsideControls.Controls.Add(this.Btn4);
-            this.InsideControls.Controls.Add(this.Btn3);
-            this.InsideControls.Controls.Add(this.Btn1);
-            this.InsideControls.Controls.Add(this.BtnP);
-            this.InsideControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.InsideControls.Location = new System.Drawing.Point(0, 0);
-            this.InsideControls.Name = "InsideControls";
-            this.InsideControls.Size = new System.Drawing.Size(124, 379);
-            this.InsideControls.TabIndex = 0;
+            this.LiftInside.Controls.Add(this.Btn0);
+            this.LiftInside.Controls.Add(this.Btn1);
+            this.LiftInside.Controls.Add(this.Btn2);
+            this.LiftInside.Controls.Add(this.Btn3);
+            this.LiftInside.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LiftInside.Location = new System.Drawing.Point(0, 0);
+            this.LiftInside.Name = "LiftInside";
+            this.LiftInside.Size = new System.Drawing.Size(108, 517);
+            this.LiftInside.TabIndex = 0;
             // 
-            // Floors
+            // Btn0
             // 
-            this.Floors.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Floors.Location = new System.Drawing.Point(336, 0);
-            this.Floors.Name = "Floors";
-            this.Floors.Size = new System.Drawing.Size(131, 536);
-            this.Floors.TabIndex = 1;
-            // 
-            // Lift
-            // 
-            this.Lift.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Lift.Location = new System.Drawing.Point(124, 0);
-            this.Lift.Name = "Lift";
-            this.Lift.Size = new System.Drawing.Size(212, 536);
-            this.Lift.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.BtnP.Location = new System.Drawing.Point(3, 119);
-            this.BtnP.Name = "button1";
-            this.BtnP.Size = new System.Drawing.Size(75, 23);
-            this.BtnP.TabIndex = 0;
-            this.BtnP.Text = "button1";
-            this.BtnP.UseVisualStyleBackColor = true;
+            this.Btn0.Location = new System.Drawing.Point(3, 3);
+            this.Btn0.Name = "Btn0";
+            this.Btn0.Size = new System.Drawing.Size(75, 23);
+            this.Btn0.TabIndex = 0;
+            this.Btn0.Text = "Btn0";
+            this.Btn0.UseVisualStyleBackColor = true;
             // 
             // Btn1
             // 
-            this.Btn1.Location = new System.Drawing.Point(3, 90);
+            this.Btn1.Location = new System.Drawing.Point(3, 32);
             this.Btn1.Name = "Btn1";
             this.Btn1.Size = new System.Drawing.Size(75, 23);
             this.Btn1.TabIndex = 0;
             this.Btn1.Text = "Btn1";
             this.Btn1.UseVisualStyleBackColor = true;
             // 
+            // Btn2
+            // 
+            this.Btn2.Location = new System.Drawing.Point(3, 61);
+            this.Btn2.Name = "Btn2";
+            this.Btn2.Size = new System.Drawing.Size(75, 23);
+            this.Btn2.TabIndex = 0;
+            this.Btn2.Text = "Btn2";
+            this.Btn2.UseVisualStyleBackColor = true;
+            // 
             // Btn3
             // 
-            this.Btn3.Location = new System.Drawing.Point(3, 61);
+            this.Btn3.Location = new System.Drawing.Point(3, 90);
             this.Btn3.Name = "Btn3";
             this.Btn3.Size = new System.Drawing.Size(75, 23);
             this.Btn3.TabIndex = 0;
-            this.Btn3.Text = "Btn2";
+            this.Btn3.Text = "Btn3";
             this.Btn3.UseVisualStyleBackColor = true;
             // 
-            // Btn4
+            // panel2
             // 
-            this.Btn4.Location = new System.Drawing.Point(3, 32);
-            this.Btn4.Name = "Btn4";
-            this.Btn4.Size = new System.Drawing.Size(75, 23);
-            this.Btn4.TabIndex = 0;
-            this.Btn4.Text = "button4";
-            this.Btn4.UseVisualStyleBackColor = true;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(108, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(154, 517);
+            this.panel2.TabIndex = 1;
             // 
-            // Btn5
+            // panel3
             // 
-            this.Btn5.Location = new System.Drawing.Point(3, 3);
-            this.Btn5.Name = "Btn5";
-            this.Btn5.Size = new System.Drawing.Size(75, 23);
-            this.Btn5.TabIndex = 0;
-            this.Btn5.Text = "button5";
-            this.Btn5.UseVisualStyleBackColor = true;
+            this.panel3.Controls.Add(this.DynamicFloorHolder);
+            this.panel3.Controls.Add(this.BottomFloorHolder);
+            this.panel3.Controls.Add(this.TopFloorHolder);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(262, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(136, 517);
+            this.panel3.TabIndex = 2;
+            // 
+            // DynamicFloorHolder
+            // 
+            this.DynamicFloorHolder.BackColor = System.Drawing.SystemColors.Control;
+            this.DynamicFloorHolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DynamicFloorHolder.Location = new System.Drawing.Point(0, 75);
+            this.DynamicFloorHolder.Name = "DynamicFloorHolder";
+            this.DynamicFloorHolder.Size = new System.Drawing.Size(136, 375);
+            this.DynamicFloorHolder.TabIndex = 2;
+            // 
+            // BottomFloorHolder
+            // 
+            this.BottomFloorHolder.BackColor = System.Drawing.SystemColors.Control;
+            this.BottomFloorHolder.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BottomFloorHolder.Location = new System.Drawing.Point(0, 450);
+            this.BottomFloorHolder.Name = "BottomFloorHolder";
+            this.BottomFloorHolder.Size = new System.Drawing.Size(136, 67);
+            this.BottomFloorHolder.TabIndex = 1;
+            // 
+            // TopFloorHolder
+            // 
+            this.TopFloorHolder.BackColor = System.Drawing.SystemColors.Control;
+            this.TopFloorHolder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopFloorHolder.Location = new System.Drawing.Point(0, 0);
+            this.TopFloorHolder.Name = "TopFloorHolder";
+            this.TopFloorHolder.Size = new System.Drawing.Size(136, 75);
+            this.TopFloorHolder.TabIndex = 0;
             // 
             // Elevator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 536);
-            this.Controls.Add(this.Lift);
-            this.Controls.Add(this.Floors);
-            this.Controls.Add(this.Inside);
+            this.ClientSize = new System.Drawing.Size(398, 517);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(414, 556);
+            this.MinimumSize = new System.Drawing.Size(414, 556);
             this.Name = "Elevator";
             this.Text = "Elevator";
-            this.Inside.ResumeLayout(false);
-            this.InsideControls.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.LiftInside.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
-        
         #endregion
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel Lift;
-        private System.Windows.Forms.Panel Floors;
-        private System.Windows.Forms.Panel Inside;
-        private System.Windows.Forms.FlowLayoutPanel InsideControls;
-        private System.Windows.Forms.Button Btn5;
-        private System.Windows.Forms.Button Btn4;
-        private System.Windows.Forms.Button Btn2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.FlowLayoutPanel LiftInside;
+        private System.Windows.Forms.FlowLayoutPanel DynamicFloorHolder;
         private System.Windows.Forms.Button Btn1;
-        private System.Windows.Forms.Button BtnP;
         private System.Windows.Forms.Button Btn3;
+        private System.Windows.Forms.Button Btn2;
+        private System.Windows.Forms.Button Btn0;
+        private System.Windows.Forms.FlowLayoutPanel TopFloorHolder;
+        private System.Windows.Forms.FlowLayoutPanel BottomFloorHolder;
     }
 }

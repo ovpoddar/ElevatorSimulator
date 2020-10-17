@@ -1,8 +1,12 @@
-﻿using System;
+﻿using ElevatorSimulator.CustomeComponents;
+using Microsoft.CSharp.RuntimeBinder;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,17 +14,51 @@ namespace ElevatorSimulator
 {
     public partial class Elevator : Form
     {
+        private Lift  _lift;
         public Elevator()
         {
             InitializeComponent();
-            InitializeMethod();
+            InitializeDynamicComponent();
+            InitializeLift();
         }
 
-        private void Btn_Click(object sender, System.EventArgs e)
+        private void Btn_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void Elevator_Load(object sender, EventArgs e)
+        {
+            InitializeMethods();
+        }
     }
 
-    
+    partial class Elevator
+    {
+        private void InitializeMethods()
+        {
+            foreach (var button in LiftInside.Controls.OfType<Button>())
+                button.Click += Btn_Click;
+        }
+
+        private void InitializeDynamicComponent()
+        {
+            var totalHeight = panel3.Height;
+            var totalButtons = LiftInside.Controls.OfType<Button>().Count();
+            var height = totalHeight / totalButtons;
+            for (int i = 0; i < totalButtons - 2; i++)
+                DynamicFloorHolder.Controls.Add(new Floor(height, true, true));
+            DynamicFloorHolder.Height = height * (totalButtons - 2);
+            TopFloorHolder.Controls.Add(new Floor(height, true, false));
+            TopFloorHolder.Height = height;
+            BottomFloorHolder.Controls.Add(new Floor(height, false, true));
+            BottomFloorHolder.Height = height;
+        }
+
+        private void InitializeLift()
+        {
+            _lift = new Lift();
+            panel2.Controls.Add(_lift);
+        }
+    }
 }
