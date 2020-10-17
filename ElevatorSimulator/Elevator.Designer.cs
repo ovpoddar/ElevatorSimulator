@@ -71,7 +71,7 @@
             this.Btn0.Name = "Btn0";
             this.Btn0.Size = new System.Drawing.Size(75, 23);
             this.Btn0.TabIndex = 0;
-            this.Btn0.Text = "Btn0";
+            this.Btn0.Text = "0";
             this.Btn0.UseVisualStyleBackColor = true;
             // 
             // Btn1
@@ -80,7 +80,7 @@
             this.Btn1.Name = "Btn1";
             this.Btn1.Size = new System.Drawing.Size(75, 23);
             this.Btn1.TabIndex = 0;
-            this.Btn1.Text = "Btn1";
+            this.Btn1.Text = "1";
             this.Btn1.UseVisualStyleBackColor = true;
             // 
             // Btn2
@@ -89,7 +89,7 @@
             this.Btn2.Name = "Btn2";
             this.Btn2.Size = new System.Drawing.Size(75, 23);
             this.Btn2.TabIndex = 0;
-            this.Btn2.Text = "Btn2";
+            this.Btn2.Text = "2";
             this.Btn2.UseVisualStyleBackColor = true;
             // 
             // Btn3
@@ -98,7 +98,7 @@
             this.Btn3.Name = "Btn3";
             this.Btn3.Size = new System.Drawing.Size(75, 23);
             this.Btn3.TabIndex = 0;
-            this.Btn3.Text = "Btn3";
+            this.Btn3.Text = "3";
             this.Btn3.UseVisualStyleBackColor = true;
             // 
             // panel2

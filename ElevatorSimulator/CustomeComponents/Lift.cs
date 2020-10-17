@@ -10,13 +10,17 @@ namespace ElevatorSimulator.CustomeComponents
 {
     public partial class Lift : UserControl
     {
-        public Lift()
+        private readonly int _height;
+
+        public Lift(int height)
         {
             InitializeComponent();
+            this._height = height;
+            this.Height = _height;
         }
         public void updatepos(int floor)
         {
-            this.Top = floor * 50;
+            this.Top = floor * _height;
         }
     }
 }

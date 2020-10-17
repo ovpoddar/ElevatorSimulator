@@ -20,21 +20,22 @@ namespace ElevatorSimulator
             InitializeComponent();
             InitializeDynamicComponent();
             InitializeLift();
+            InitializeMethods();
         }
 
         private void Btn_Click(object sender, EventArgs e)
         {
-
+            var button = (Button)sender;
+            var floor = Convert.ToInt32(button.Text);
+            _lift.updatepos(floor);
         }
 
         private void Elevator_Load(object sender, EventArgs e)
         {
-            InitializeMethods();
         }
-    }
 
-    partial class Elevator
-    {
+
+        #region ugly methods
         private void InitializeMethods()
         {
             foreach (var button in LiftInside.Controls.OfType<Button>())
@@ -57,8 +58,14 @@ namespace ElevatorSimulator
 
         private void InitializeLift()
         {
-            _lift = new Lift();
+            var totalHeight = panel3.Height;
+            var totalButtons = LiftInside.Controls.OfType<Button>().Count();
+            var height = totalHeight / totalButtons;
+            _lift = new Lift(height);
             panel2.Controls.Add(_lift);
+
+            _lift.updatepos(totalButtons - 1);
         }
+        #endregion
     }
 }
