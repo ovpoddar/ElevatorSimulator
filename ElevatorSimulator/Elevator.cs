@@ -23,11 +23,11 @@ namespace ElevatorSimulator
             InitializeMethods();
         }
 
-        private void Btn_Click(object sender, EventArgs e)
+        private async void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var floor = Convert.ToInt32(button.Text);
-            _lift.updatepos(floor);
+            await _lift.GoTo(floor);
         }
 
         private void Elevator_Load(object sender, EventArgs e)
