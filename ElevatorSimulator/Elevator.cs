@@ -1,20 +1,13 @@
 ﻿using ElevatorSimulator.CustomeComponents;
-using Microsoft.CSharp.RuntimeBinder;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ElevatorSimulator
 {
     public partial class Elevator : Form
     {
-        private Lift  _lift;
+        private Lift _lift;
         public Elevator()
         {
             InitializeComponent();
@@ -23,11 +16,11 @@ namespace ElevatorSimulator
             InitializeMethods();
         }
 
-        private async void Btn_Click(object sender, EventArgs e)
+        private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var floor = Convert.ToInt32(button.Text);
-            await _lift.GoTo(floor);
+            _lift.GoTo(floor);
         }
 
         private void Elevator_Load(object sender, EventArgs e)

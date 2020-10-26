@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace ElevatorSimulator.CustomeComponents
 {
@@ -22,24 +16,24 @@ namespace ElevatorSimulator.CustomeComponents
             this.Height = _height;
             _CurrentFloor = 0;
         }
-        public async Task GoTo(int floor)
+        public void GoTo(int floor)
         {
-            if (floor > _CurrentFloor)
-            {
-                for (var i = _CurrentFloor; i <= floor; i++)
+                if (floor > _CurrentFloor)
                 {
-                    Thread.Sleep(1000);
-                    updatepos(i);
+                    for (var i = _CurrentFloor; i <= floor; i++)
+                    {
+                        Thread.Sleep(1000);
+                        updatepos(i);
+                    }
                 }
-            }
-            else
-            {
-                for (var i = _CurrentFloor; i >= floor; i--)
+                else
                 {
-                    Thread.Sleep(1000);
-                    updatepos(i);
+                    for (var i = _CurrentFloor; i >= floor; i--)
+                    {
+                        Thread.Sleep(1000);
+                        updatepos(i);
+                    }
                 }
-            }
         }
 
         public void updatepos(int floor)
