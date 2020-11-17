@@ -20,7 +20,8 @@ namespace ElevatorSimulator
         {
             var button = (Button)sender;
             var floor = Convert.ToInt32(button.Text);
-            _lift.GoTo(floor);
+            _lift.Request(floor);
+            _lift.GoTo();
         }
 
         private void Elevator_Load(object sender, EventArgs e)
