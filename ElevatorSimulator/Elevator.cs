@@ -1,6 +1,7 @@
 ﻿using ElevatorSimulator.CustomeComponents;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ElevatorSimulator
@@ -14,15 +15,34 @@ namespace ElevatorSimulator
             InitializeDynamicComponent();
             InitializeLift();
             InitializeMethods();
+            _lift.LiftMoving += _lift_LiftMoving;
+        }
+
+        private void _lift_LiftMoving(object sender, int e)
+        {
+            _lift.updatepos(e);
         }
 
         private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var floor = Convert.ToInt32(button.Text);
-            _lift.Request(floor);
-            _lift.GoTo();
+
+            if (_lift.IsMoving)
+            {
+                _lift.TokenSource.Cancel();
+                _lift.Request(floor);
+                _lift.GoTo();
+            }
+            else
+            {
+                _lift.Request(floor);
+                _lift.GoTo();
+            }
+
         }
+
+        
 
         private void Elevator_Load(object sender, EventArgs e)
         {
