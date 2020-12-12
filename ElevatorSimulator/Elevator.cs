@@ -1,6 +1,9 @@
 ﻿using ElevatorSimulator.CustomeComponents;
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -9,44 +12,75 @@ namespace ElevatorSimulator
     public partial class Elevator : Form
     {
         private Lift _lift;
+
+        private Socket _serverSocket;
+        private Socket _clientSocket; 
+        private byte[] _buffer;
         public Elevator()
         {
             InitializeComponent();
             InitializeDynamicComponent();
             InitializeLift();
             InitializeMethods();
-            _lift.LiftMoving += _lift_LiftMoving;
+            CreateSarver();
         }
 
-        private void _lift_LiftMoving(object sender, int e)
+        void CreateSarver()
         {
-            _lift.updatepos(e);
+            _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, 3333));
+            _serverSocket.Listen(10);
+
+            ConnectingSarver();
         }
+
+        private void Elevator_Load(object sender, EventArgs e)
+        {
+        }
+
+        void ConnectingSarver()
+        {
+            _serverSocket.BeginAccept(AcceptCallback, null);
+        }
+
+        void AcceptCallback(IAsyncResult ar)
+        {
+            _clientSocket = _serverSocket.EndAccept(ar);
+            _buffer = new byte[_clientSocket.ReceiveBufferSize];
+            _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
+            ConnectingSarver();
+        }
+
+        private void ReceiveCallback(IAsyncResult ar)
+        {
+            int received = _clientSocket.EndReceive(ar);
+
+            if (received == 0)
+            {
+                return;
+            }
+
+            string message = Encoding.ASCII.GetString(_buffer, 0, received);
+            Invoke((Action)delegate
+            {
+                _lift.updatepos(int.Parse(message));
+            });
+
+            _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
+        }
+
 
         private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var floor = Convert.ToInt32(button.Text);
 
-            if (_lift.IsMoving)
-            {
-                _lift.TokenSource.Cancel();
-                _lift.Request(floor);
-                _lift.GoTo();
-            }
-            else
-            {
-                _lift.Request(floor);
-                _lift.GoTo();
-            }
+            var floorEnc = Encoding.ASCII.GetBytes(floor.ToString());
+
+            _clientSocket.Send(floorEnc);
 
         }
 
-        
-
-        private void Elevator_Load(object sender, EventArgs e)
-        {
-        }
 
 
         #region ugly methods
