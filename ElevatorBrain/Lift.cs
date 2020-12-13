@@ -26,7 +26,7 @@ namespace ElevatorBrain
             InitializeComponent();
             ConnectToSarver();
 
-            _CurrentFloor = 0;
+            _CurrentFloor = 3;
             _path = new List<int>();
         }
 
