@@ -116,10 +116,11 @@ namespace ElevatorBrain
                 {
                     if (_cancellationToken.IsCancellationRequested)
                         break;
-                    Thread.Sleep(500);
+                    Thread.Sleep(5000);
                     try
                     {
                         sendMessage(_path[0].ToString());
+                        _CurrentFloor = _path[0];
                         IsMoving = true;
                         _path.RemoveAt(0);
                         index++;
