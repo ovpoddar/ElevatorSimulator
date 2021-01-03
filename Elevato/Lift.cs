@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Elevator
 {
     public class Lift : ILift
     {
         private int _CurrentFloor;
-        public readonly List<int> _path;
+        private readonly List<int> _path;
 
         public volatile bool IsMoving;
 
@@ -49,18 +50,22 @@ namespace Elevator
 
         public void GoTo()
         {
-            Thread.Sleep(1000);
-            try
+            Task.Run(() =>
             {
-                IsMoved.Raise(this, _path[0]);
-                _CurrentFloor = _path[0];
-                IsMoving = true;
-                _path.RemoveAt(0);
-            }
-            catch (Exception)
-            {
-                IsMoving = true;
-            }
+                Thread.Sleep(5000);
+                try
+                {
+                    IsMoved.Raise(this, _path[0]);
+                    _CurrentFloor = _path[0];
+                    IsMoving = true;
+                    _path.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    IsMoving = true;
+                }
+            });
+            
         }
     }
 }

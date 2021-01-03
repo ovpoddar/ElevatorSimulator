@@ -9,7 +9,6 @@ namespace ElevatorSimulator.CustomeComponents
     public partial class Lift : UserControl
     {
         private readonly int _height;
-        public int _CurrentFloor;
 
         public Lift(int height)
         {
@@ -21,7 +20,6 @@ namespace ElevatorSimulator.CustomeComponents
         public void updatepos(int floor)
         {
             this.Top = floor * _height;
-            _CurrentFloor = floor;
         }
     }
 }

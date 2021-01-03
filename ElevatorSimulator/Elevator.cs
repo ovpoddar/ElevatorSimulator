@@ -60,12 +60,12 @@ namespace ElevatorSimulator
                 return;
             }
 
-            string message = Encoding.ASCII.GetString(_buffer, 0, received);
+            int message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
             Invoke((Action)delegate
             {
-                _lift.updatepos(int.Parse(message));
+                _lift.updatepos(message);
+                _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
             });
-
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }
 
