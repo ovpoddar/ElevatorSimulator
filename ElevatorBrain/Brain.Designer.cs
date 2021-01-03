@@ -1,7 +1,7 @@
 ﻿
 namespace ElevatorBrain
 {
-    partial class Lift
+    partial class Brain
     {
         /// <summary>
         ///  Required designer variable.

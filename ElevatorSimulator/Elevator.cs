@@ -28,7 +28,7 @@ namespace ElevatorSimulator
         void CreateSarver()
         {
             _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, 3333));
+            _serverSocket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3333));
             _serverSocket.Listen(10);
 
             ConnectingSarver();
