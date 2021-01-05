@@ -1,4 +1,5 @@
-﻿using Elevator.Extand;
+﻿using Elevato.Models;
+using Elevator.Extand;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,6 +13,7 @@ namespace Elevator
         private readonly List<int> _path;
 
         public volatile bool IsMoving;
+        public volatile Direction direction;
 
         public EventHandler<int> IsMoved;
 
@@ -23,23 +25,28 @@ namespace Elevator
 
         public void Request(int floor)
         {
-            var currentFloor = CalculateCurrentFloor();
-            if (floor > currentFloor)
-            {
-                for (var i = currentFloor; i <= floor; i++)
-                {
-                    _path.Add(i);
-                }
-            }
+            if (_path.Contains(floor))
+                _path.Insert(_path.IndexOf(floor), floor);
             else
             {
-                for (var i = currentFloor; i >= floor; i--)
+                var currentFloor = CalculateCurrentFloor();
+                if (floor > currentFloor)
                 {
-                    _path.Add(i);
+                    for (var i = currentFloor; i <= floor; i++)
+                    {
+                        _path.Add(i);
+                    }
                 }
+                else
+                {
+                    for (var i = currentFloor; i >= floor; i--)
+                    {
+                        _path.Add(i);
+                    }
+                }
+                // this one for reaching the destination
+                _path.Add(floor);
             }
-            // this one for reaching the destination
-            _path.Add(floor);
         }
         private int CalculateCurrentFloor()
         {
@@ -56,12 +63,15 @@ namespace Elevator
                 _CurrentFloor = _path[0];
                 IsMoving = true;
                 _path.RemoveAt(0);
+
+                // calculate the direction
             }
             catch (Exception)
             {
                 IsMoving = false;
             }
-            
+
         }
     }
+
 }
