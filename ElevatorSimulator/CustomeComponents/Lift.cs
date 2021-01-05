@@ -19,7 +19,17 @@ namespace ElevatorSimulator.CustomeComponents
 
         public void updatepos(int floor)
         {
-            this.Top = floor * _height;
+            try
+            {
+                this.Top = floor * _height;
+            }
+            catch
+            {
+                Invoke((Action)delegate
+                {
+                    this.Top = floor * _height;
+                });
+            }
         }
     }
 }

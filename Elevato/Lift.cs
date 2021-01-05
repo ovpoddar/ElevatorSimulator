@@ -50,21 +50,17 @@ namespace Elevator
 
         public void GoTo()
         {
-            Task.Run(() =>
+            try
             {
-                Thread.Sleep(5000);
-                try
-                {
-                    IsMoved.Raise(this, _path[0]);
-                    _CurrentFloor = _path[0];
-                    IsMoving = true;
-                    _path.RemoveAt(0);
-                }
-                catch (Exception)
-                {
-                    IsMoving = true;
-                }
-            });
+                IsMoved.Raise(this, _path[0]);
+                _CurrentFloor = _path[0];
+                IsMoving = true;
+                _path.RemoveAt(0);
+            }
+            catch (Exception)
+            {
+                IsMoving = false;
+            }
             
         }
     }

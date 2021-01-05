@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace ElevatorSimulator
 {
@@ -14,7 +15,7 @@ namespace ElevatorSimulator
         private Lift _lift;
 
         private Socket _serverSocket;
-        private Socket _clientSocket; 
+        private Socket _clientSocket;
         private byte[] _buffer;
         public Elevator()
         {
@@ -63,8 +64,12 @@ namespace ElevatorSimulator
             int message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
             Invoke((Action)delegate
             {
-                _lift.updatepos(message);
-                _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
+                Task.Run(() =>
+                {
+                    Thread.Sleep(5000);
+                    _lift.updatepos(message);
+                    _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
+                });
             });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }

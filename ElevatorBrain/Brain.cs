@@ -47,6 +47,7 @@ namespace ElevatorBrain
 
 
             string message = Encoding.ASCII.GetString(_buffer, 0, received);
+            var x = _lift.IsMoving;
             if (message == "Done")
                 Invoke((Action)delegate
                 {
@@ -56,7 +57,8 @@ namespace ElevatorBrain
                 Invoke((Action)delegate
                 {
                     _lift.Request(int.Parse(message));
-                    _lift.GoTo();
+                    if(!_lift.IsMoving)
+                        _lift.GoTo();
                 });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }
