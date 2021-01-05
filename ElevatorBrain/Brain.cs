@@ -1,4 +1,5 @@
-﻿using Elevator;
+﻿using Elevato.Extand;
+using Elevator;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -48,7 +49,6 @@ namespace ElevatorBrain
 
 
             string message = Encoding.ASCII.GetString(_buffer, 0, received);
-            var x = _lift.IsMoving;
             if (message == "Done")
                 Invoke((Action)delegate
                 {
@@ -57,7 +57,7 @@ namespace ElevatorBrain
             else
                 Invoke((Action)delegate
                 {
-                    _lift.Request(int.Parse(message));
+                    _lift.Request(MessageHelper.ParseMessage(message));
                     if(!_lift.IsMoving)
                         _lift.GoTo();
                 });

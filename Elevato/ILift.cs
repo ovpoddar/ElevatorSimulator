@@ -1,8 +1,10 @@
-﻿namespace Elevator
+﻿using Elevato.Models;
+
+namespace Elevator
 {
     public interface ILift
     {
         void GoTo();
-        void Request(int floor);
+        void Request(Message message);
     }
 }

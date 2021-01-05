@@ -78,9 +78,8 @@ namespace ElevatorSimulator
         private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            var floor = Convert.ToInt32(button.Text);
 
-            var floorEnc = Encoding.ASCII.GetBytes(floor.ToString());
+            var floorEnc = Encoding.ASCII.GetBytes($"{button.Text}-Go");
 
             _clientSocket.Send(floorEnc);
 
@@ -93,6 +92,19 @@ namespace ElevatorSimulator
         {
             foreach (var button in LiftInside.Controls.OfType<Button>())
                 button.Click += Btn_Click;
+
+            foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
+                foreach (var button in floor.Controls.OfType<Button>())
+                    button.Click += DirBtnClick;
+        }
+
+        private void DirBtnClick(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+
+            var floorEnc = Encoding.ASCII.GetBytes(button.Name.ToString());
+
+            _clientSocket.Send(floorEnc);
         }
 
         private void InitializeDynamicComponent()
@@ -101,11 +113,11 @@ namespace ElevatorSimulator
             var totalButtons = LiftInside.Controls.OfType<Button>().Count();
             var height = totalHeight / totalButtons;
             for (int i = 0; i < totalButtons - 2; i++)
-                DynamicFloorHolder.Controls.Add(new Floor(height, true, true));
+                DynamicFloorHolder.Controls.Add(new Floor(height, true, true, $"{i + 1}"));
             DynamicFloorHolder.Height = height * (totalButtons - 2);
-            TopFloorHolder.Controls.Add(new Floor(height, true, false));
+            TopFloorHolder.Controls.Add(new Floor(height, true, false, "T"));
             TopFloorHolder.Height = height;
-            BottomFloorHolder.Controls.Add(new Floor(height, false, true));
+            BottomFloorHolder.Controls.Add(new Floor(height, false, true, "G"));
             BottomFloorHolder.Height = height;
         }
 

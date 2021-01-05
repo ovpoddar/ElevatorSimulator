@@ -23,29 +23,33 @@ namespace Elevator
             _path = new List<int>();
         }
 
-        public void Request(int floor)
+        public void Request(Message message)
         {
-            if (_path.Contains(floor))
-                _path.Insert(_path.IndexOf(floor), floor);
+            /// now i have the which button is being pressed and
+            /// which floor i need to go no i need to calculate the path according to the  need
+            /// possiable message Directions are Go, Up, Down
+
+            if (_path.Contains(message.FloorNumber))
+                _path.Insert(_path.IndexOf(message.FloorNumber), message.FloorNumber);
             else
             {
                 var currentFloor = CalculateCurrentFloor();
-                if (floor > currentFloor)
+                if (message.FloorNumber > currentFloor)
                 {
-                    for (var i = currentFloor; i <= floor; i++)
+                    for (var i = currentFloor; i <= message.FloorNumber; i++)
                     {
                         _path.Add(i);
                     }
                 }
                 else
                 {
-                    for (var i = currentFloor; i >= floor; i--)
+                    for (var i = currentFloor; i >= message.FloorNumber; i--)
                     {
                         _path.Add(i);
                     }
                 }
                 // this one for reaching the destination
-                _path.Add(floor);
+                _path.Add(message.FloorNumber);
             }
         }
         private int CalculateCurrentFloor()
