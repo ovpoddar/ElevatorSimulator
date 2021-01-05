@@ -59,18 +59,41 @@ namespace Elevator
         {
             try
             {
+                CalculateDirection();
                 IsMoved.Raise(this, _path[0]);
                 _CurrentFloor = _path[0];
                 IsMoving = true;
                 _path.RemoveAt(0);
-
-                // calculate the direction
             }
             catch (Exception)
             {
                 IsMoving = false;
+                direction = Direction.Stop;
             }
 
+        }
+
+        private void CalculateDirection()
+        {
+            try
+            {
+                if (_path[0] < _path[1])
+                {
+                    direction = Direction.Down;
+                }
+                else if (_path[0] > _path[1])
+                {
+                    direction = Direction.Up;
+                }
+                else
+                {
+                    direction = Direction.Stop;
+                }
+            }
+            catch
+            {
+                direction = Direction.Stop;
+            }
         }
     }
 

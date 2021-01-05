@@ -26,7 +26,8 @@ namespace ElevatorBrain
 
         private void LiftMoved(object sender, int e)
         {
-            listBox1.Items.Add(e);
+            var messa = e + "  " +_lift.direction;
+            listBox1.Items.Add(messa);
             sendMessage(e.ToString());
         }
 
