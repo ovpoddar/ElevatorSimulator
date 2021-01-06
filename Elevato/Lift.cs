@@ -30,28 +30,35 @@ namespace Elevator
             /// possiable message Directions are Go, Up, Down
 
             if (_path.Contains(message.FloorNumber))
-                _path.Insert(_path.IndexOf(message.FloorNumber), message.FloorNumber);
+            {
+                if (message.Direction == direction.ToString())
+                    _path.Insert(_path.IndexOf(message.FloorNumber), message.FloorNumber);
+            }
+            else
+                AddStop(message);
+        }
+
+        private void AddStop(Message message)
+        {
+            var currentFloor = CalculateCurrentFloor();
+            if (message.FloorNumber > currentFloor)
+            {
+                for (var i = currentFloor; i <= message.FloorNumber; i++)
+                {
+                    _path.Add(i);
+                }
+            }
             else
             {
-                var currentFloor = CalculateCurrentFloor();
-                if (message.FloorNumber > currentFloor)
+                for (var i = currentFloor; i >= message.FloorNumber; i--)
                 {
-                    for (var i = currentFloor; i <= message.FloorNumber; i++)
-                    {
-                        _path.Add(i);
-                    }
+                    _path.Add(i);
                 }
-                else
-                {
-                    for (var i = currentFloor; i >= message.FloorNumber; i--)
-                    {
-                        _path.Add(i);
-                    }
-                }
-                // this one for reaching the destination
-                _path.Add(message.FloorNumber);
             }
+            // this one for reaching the destination
+            _path.Add(message.FloorNumber);
         }
+
         private int CalculateCurrentFloor()
         {
             if (_path.Count != 0)

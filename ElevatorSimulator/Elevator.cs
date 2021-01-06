@@ -115,9 +115,9 @@ namespace ElevatorSimulator
             for (int i = 0; i < totalButtons - 2; i++)
                 DynamicFloorHolder.Controls.Add(new Floor(height, true, true, $"{i + 1}"));
             DynamicFloorHolder.Height = height * (totalButtons - 2);
-            TopFloorHolder.Controls.Add(new Floor(height, true, false, "T"));
+            TopFloorHolder.Controls.Add(new Floor(height, false, true, "T"));
             TopFloorHolder.Height = height;
-            BottomFloorHolder.Controls.Add(new Floor(height, false, true, "G"));
+            BottomFloorHolder.Controls.Add(new Floor(height, true, false, "G"));
             BottomFloorHolder.Height = height;
         }
 
