@@ -25,10 +25,6 @@ namespace Elevator
 
         public void Request(Message message)
         {
-            /// now i have the which button is being pressed and
-            /// which floor i need to go no i need to calculate the path according to the  need
-            /// possiable message Directions are Go, Up, Down
-
             if (_path.Contains(message.FloorNumber))
             {
                 if (message.Direction == direction.ToString())
@@ -42,19 +38,11 @@ namespace Elevator
         {
             var currentFloor = CalculateCurrentFloor();
             if (message.FloorNumber > currentFloor)
-            {
                 for (var i = currentFloor; i <= message.FloorNumber; i++)
-                {
                     _path.Add(i);
-                }
-            }
             else
-            {
                 for (var i = currentFloor; i >= message.FloorNumber; i--)
-                {
                     _path.Add(i);
-                }
-            }
             // this one for reaching the destination
             _path.Add(message.FloorNumber);
         }
@@ -89,17 +77,11 @@ namespace Elevator
             try
             {
                 if (_path[0] < _path[1])
-                {
                     direction = Direction.Down;
-                }
                 else if (_path[0] > _path[1])
-                {
                     direction = Direction.Up;
-                }
                 else
-                {
                     direction = Direction.Stop;
-                }
             }
             catch
             {

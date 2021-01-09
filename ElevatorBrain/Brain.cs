@@ -47,7 +47,6 @@ namespace ElevatorBrain
             if (received == 0)
                 return;
 
-
             string message = Encoding.ASCII.GetString(_buffer, 0, received);
             if (message == "Done")
                 Invoke((Action)delegate
