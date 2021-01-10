@@ -96,6 +96,31 @@ namespace ElevatorSimulator
             foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
                 foreach (var button in floor.Controls.OfType<Button>())
                     button.Click += DirBtnClick;
+
+            foreach (var floor in TopFloorHolder.Controls.OfType<Floor>())
+                foreach (var button in floor.Controls.OfType<Button>())
+                    button.Click += CustomClick;
+
+            foreach (var floor in BottomFloorHolder.Controls.OfType<Floor>())
+                foreach (var button in floor.Controls.OfType<Button>())
+                    button.Click += CustomClick;
+        }
+
+        private void CustomClick(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+
+            var floorEnc = Encoding.ASCII.GetBytes(MakeFix(button));
+
+            _clientSocket.Send(floorEnc);
+        }
+
+        private string MakeFix(Button button)
+        {
+            var name = button.Name.ToString();
+            if (name == "T-Down")
+                return "0-Up";
+            return "3-Down";
         }
 
         private void DirBtnClick(object sender, EventArgs e)
