@@ -46,7 +46,7 @@ namespace Elevator.UI
             _clientSocket = _serverSocket.EndAccept(ar);
             _buffer = new byte[_clientSocket.ReceiveBufferSize];
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
-            ConnectingSarver();
+            ConnectingSarver(); 
         }
 
         private void ReceiveCallback(IAsyncResult ar)
@@ -80,9 +80,6 @@ namespace Elevator.UI
 
         }
 
-
-
-        #region ugly methods
         private void InitializeMethods()
         {
             foreach (var button in LiftInside.Controls.OfType<Button>())
@@ -104,19 +101,16 @@ namespace Elevator.UI
         private void CustomClick(object sender, EventArgs e)
         {
             var button = (Button)sender;
-
-            var floorEnc = Encoding.ASCII.GetBytes(MakeFix(button));
+            var name = button.Name.ToString();
+            var decodeName = "";
+            if (name == "T-Down")
+                decodeName = "0-Up";
+            decodeName = "3-Down";
+            var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);
         }
 
-        private string MakeFix(Button button)
-        {
-            var name = button.Name.ToString();
-            if (name == "T-Down")
-                return "0-Up";
-            return "3-Down";
-        }
 
         private void DirBtnClick(object sender, EventArgs e)
         {
@@ -151,6 +145,5 @@ namespace Elevator.UI
 
             _lift.updatepos(totalButtons - 1);
         }
-        #endregion
     }
 }
