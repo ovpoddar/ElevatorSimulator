@@ -26,7 +26,7 @@ namespace Elevator.UI
             CreateSarver();
         }
 
-        void CreateSarver()
+        private void CreateSarver()
         {
             _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _serverSocket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3333));
@@ -35,12 +35,12 @@ namespace Elevator.UI
             ConnectingSarver();
         }
 
-        void ConnectingSarver()
+        private void ConnectingSarver()
         {
             _serverSocket.BeginAccept(AcceptCallback, null);
         }
 
-        void AcceptCallback(IAsyncResult ar)
+        private void AcceptCallback(IAsyncResult ar)
         {
             _clientSocket = _serverSocket.EndAccept(ar);
             _buffer = new byte[_clientSocket.ReceiveBufferSize];

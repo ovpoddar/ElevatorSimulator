@@ -23,12 +23,12 @@ namespace Elevator.Brain
 
         private void LiftMoved(object sender, int e)
         {
-            var messa = e + "  " +_lift.direction;
+            var messa = e + "  " + _lift.direction;
             listBox1.Items.Add(messa);
             sendMessage(e.ToString());
         }
 
-        void ConnectToSarver()
+        private void ConnectToSarver()
         {
             _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _clientSocket.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3333));
@@ -43,7 +43,7 @@ namespace Elevator.Brain
             if (received == 0)
                 return;
 
-            string message = Encoding.ASCII.GetString(_buffer, 0, received);
+            var message = Encoding.ASCII.GetString(_buffer, 0, received);
             if (message == "Done")
                 Invoke((Action)delegate
                 {
@@ -53,7 +53,7 @@ namespace Elevator.Brain
                 Invoke((Action)delegate
                 {
                     _lift.Request(MessageHelper.ParseMessage(message));
-                    if(!_lift.IsMoving)
+                    if (!_lift.IsMoving)
                         _lift.GoTo();
                 });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
@@ -64,6 +64,5 @@ namespace Elevator.Brain
         {
             _clientSocket.Send(Encoding.ASCII.GetBytes(Message));
         }
-
     }
 }
