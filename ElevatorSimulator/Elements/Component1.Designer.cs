@@ -1,4 +1,4 @@
-﻿namespace ElevatorSimulator.Elements
+﻿namespace Elevator.UI.Elements
 {
     partial class Component1
     {

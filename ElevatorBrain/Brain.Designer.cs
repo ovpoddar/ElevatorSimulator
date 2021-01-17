@@ -1,5 +1,5 @@
 ﻿
-namespace ElevatorBrain
+namespace Elevator.Brain
 {
     partial class Brain
     {

@@ -1,4 +1,4 @@
-﻿using ElevatorSimulator.CustomeComponents;
+﻿using Elevator.UI.CustomeComponents;
 using System;
 using System.Linq;
 using System.Net;
@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ElevatorSimulator
+namespace Elevator.UI
 {
     public partial class Elevator : Form
     {

@@ -4,10 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>Elevator.Brain</AssemblyName>
+    <RootNamespace>Elevator.Brain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elevato\Elevato.csproj" />
+    <ProjectReference Include="..\Elevato\Elevator.csproj" />
   </ItemGroup>
 
 </Project>

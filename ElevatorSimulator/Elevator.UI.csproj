@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Elevator.UI</RootNamespace>
+    <AssemblyName>Elevator.UI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ElevatorSimulator.Elements
+namespace Elevator.UI.Elements
 {
     public partial class Component1 : Component
     {

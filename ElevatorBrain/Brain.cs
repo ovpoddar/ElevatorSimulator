@@ -1,12 +1,11 @@
-﻿using Elevato.Extand;
-using Elevator;
+﻿using Elevator.Extand;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ElevatorBrain
+namespace Elevator.Brain
 {
     public partial class Brain : Form
     {

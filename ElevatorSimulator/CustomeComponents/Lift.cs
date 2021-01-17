@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ElevatorSimulator.CustomeComponents
+namespace Elevator.UI.CustomeComponents
 {
     public partial class Lift : UserControl
     {

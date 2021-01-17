@@ -1,4 +1,4 @@
-﻿namespace Elevato.Models
+﻿namespace Elevator.Models
 {
     public class Message
     {

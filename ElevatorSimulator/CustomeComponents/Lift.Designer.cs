@@ -1,4 +1,4 @@
-﻿namespace ElevatorSimulator.CustomeComponents
+﻿namespace Elevator.UI.CustomeComponents
 {
     partial class Lift
     {
