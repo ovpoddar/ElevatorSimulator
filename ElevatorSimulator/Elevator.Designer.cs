@@ -34,6 +34,7 @@
             this.Btn1 = new System.Windows.Forms.Button();
             this.Btn2 = new System.Windows.Forms.Button();
             this.Btn3 = new System.Windows.Forms.Button();
+            this.Btn4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.DynamicFloorHolder = new System.Windows.Forms.FlowLayoutPanel();
@@ -59,6 +60,7 @@
             this.LiftInside.Controls.Add(this.Btn1);
             this.LiftInside.Controls.Add(this.Btn2);
             this.LiftInside.Controls.Add(this.Btn3);
+            this.LiftInside.Controls.Add(this.Btn4);
             this.LiftInside.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LiftInside.Location = new System.Drawing.Point(0, 0);
             this.LiftInside.Name = "LiftInside";
@@ -101,6 +103,15 @@
             this.Btn3.Text = "3";
             this.Btn3.UseVisualStyleBackColor = true;
             // 
+            // Btn4
+            // 
+            this.Btn4.Location = new System.Drawing.Point(3, 119);
+            this.Btn4.Name = "Btn4";
+            this.Btn4.Size = new System.Drawing.Size(75, 23);
+            this.Btn4.TabIndex = 1;
+            this.Btn4.Text = "4";
+            this.Btn4.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -126,16 +137,16 @@
             this.DynamicFloorHolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DynamicFloorHolder.Location = new System.Drawing.Point(0, 75);
             this.DynamicFloorHolder.Name = "DynamicFloorHolder";
-            this.DynamicFloorHolder.Size = new System.Drawing.Size(136, 375);
+            this.DynamicFloorHolder.Size = new System.Drawing.Size(136, 362);
             this.DynamicFloorHolder.TabIndex = 2;
             // 
             // BottomFloorHolder
             // 
             this.BottomFloorHolder.BackColor = System.Drawing.SystemColors.Control;
             this.BottomFloorHolder.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomFloorHolder.Location = new System.Drawing.Point(0, 450);
+            this.BottomFloorHolder.Location = new System.Drawing.Point(0, 437);
             this.BottomFloorHolder.Name = "BottomFloorHolder";
-            this.BottomFloorHolder.Size = new System.Drawing.Size(136, 67);
+            this.BottomFloorHolder.Size = new System.Drawing.Size(136, 80);
             this.BottomFloorHolder.TabIndex = 1;
             // 
             // TopFloorHolder
@@ -179,5 +190,6 @@
         private System.Windows.Forms.Button Btn0;
         private System.Windows.Forms.FlowLayoutPanel TopFloorHolder;
         private System.Windows.Forms.FlowLayoutPanel BottomFloorHolder;
+        private System.Windows.Forms.Button Btn4;
     }
 }

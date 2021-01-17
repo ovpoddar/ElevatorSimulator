@@ -105,7 +105,7 @@ namespace Elevator.UI
             var decodeName = "";
             if (name == "T-Down")
                 decodeName = "0-Up";
-            decodeName = "3-Down";
+            decodeName = "4-Down";
             var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);

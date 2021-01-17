@@ -11,6 +11,7 @@ namespace Elevator.UI.CustomeComponents
         {
             _height = height;
             InitializeComponent();
+            this.Height = _height;
         }
 
         public void updatepos(int floor)
