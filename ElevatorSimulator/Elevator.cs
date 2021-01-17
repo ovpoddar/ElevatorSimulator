@@ -61,7 +61,7 @@ namespace Elevator.UI
             {
                 Task.Run(() =>
                 {
-                    Thread.Sleep(5000);
+                    Thread.Sleep(2000);
                     _lift.updatepos(message);
                     _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
                 });
