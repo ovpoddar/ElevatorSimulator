@@ -8,8 +8,4 @@
     <AssemblyName>Elevator.UI</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Elements\" />
-  </ItemGroup>
-
 </Project>

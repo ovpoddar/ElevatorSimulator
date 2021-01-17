@@ -13,10 +13,11 @@ namespace Elevator.UI
     public partial class Elevator : Form
     {
         private Lift _lift;
-
         private Socket _serverSocket;
         private Socket _clientSocket;
         private byte[] _buffer;
+
+
         public Elevator()
         {
             InitializeComponent();
