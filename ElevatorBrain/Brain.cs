@@ -69,10 +69,5 @@ namespace ElevatorBrain
             _clientSocket.Send(Encoding.ASCII.GetBytes(Message));
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var floorEnc = Encoding.ASCII.GetBytes("lift");
-            _clientSocket.Send(floorEnc);
-        }
     }
 }
