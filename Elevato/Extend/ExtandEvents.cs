@@ -8,16 +8,15 @@ namespace Elevator.Extend
         public static object Raise(this MulticastDelegate multicastDelegate, object sender, object eventArgs)
         {
             object retval = null;
-            if (multicastDelegate != null)
+            if (multicastDelegate == null)
+                return retval;
+            foreach (var d in multicastDelegate.GetInvocationList())
             {
-                foreach (var d in multicastDelegate.GetInvocationList())
-                {
-                    var ISynchronizeInvoke = d.Target as ISynchronizeInvoke;
-                    if (ISynchronizeInvoke != null && ISynchronizeInvoke.InvokeRequired)
-                        retval = ISynchronizeInvoke.EndInvoke(ISynchronizeInvoke.BeginInvoke(d, new[] { sender, eventArgs }));
-                    else
-                        retval = d.DynamicInvoke(new[] { sender, eventArgs });
-                }
+                var ISynchronizeInvoke = d.Target as ISynchronizeInvoke;
+                if (ISynchronizeInvoke != null && ISynchronizeInvoke.InvokeRequired)
+                    retval = ISynchronizeInvoke.EndInvoke(ISynchronizeInvoke.BeginInvoke(d, new[] { sender, eventArgs }));
+                else
+                    retval = d.DynamicInvoke(new[] { sender, eventArgs });
             }
             return retval;
         }
