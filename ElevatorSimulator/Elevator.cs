@@ -35,10 +35,6 @@ namespace Elevator.UI
             ConnectingSarver();
         }
 
-        private void Elevator_Load(object sender, EventArgs e)
-        {
-        }
-
         void ConnectingSarver()
         {
             _serverSocket.BeginAccept(AcceptCallback, null);
@@ -54,14 +50,12 @@ namespace Elevator.UI
 
         private void ReceiveCallback(IAsyncResult ar)
         {
-            int received = _clientSocket.EndReceive(ar);
+            var received = _clientSocket.EndReceive(ar);
 
             if (received == 0)
-            {
                 return;
-            }
 
-            int message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
+            var message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
             Invoke((Action)delegate
             {
                 Task.Run(() =>

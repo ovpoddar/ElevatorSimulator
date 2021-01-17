@@ -1,4 +1,4 @@
-﻿using Elevator.Extand;
+﻿using Elevator.Extend;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -38,7 +38,7 @@ namespace Elevator.Brain
 
         private void ReceiveCallback(IAsyncResult ar)
         {
-            int received = _clientSocket.EndReceive(ar);
+            var received = _clientSocket.EndReceive(ar);
 
             if (received == 0)
                 return;
