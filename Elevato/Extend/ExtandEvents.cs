@@ -7,9 +7,9 @@ namespace Elevator.Extend
     {
         public static object Raise(this MulticastDelegate multicastDelegate, object sender, object eventArgs)
         {
-            object retval = null;
             if (multicastDelegate == null)
-                return retval;
+                return null;
+            object retval = null;
             foreach (var d in multicastDelegate.GetInvocationList())
             {
                 var ISynchronizeInvoke = d.Target as ISynchronizeInvoke;
