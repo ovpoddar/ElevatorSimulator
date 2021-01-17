@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Elevator.Extand
+namespace Elevator.Extend
 {
     public static class ExtandEvents
     {

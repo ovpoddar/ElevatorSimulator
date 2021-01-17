@@ -1,6 +1,6 @@
 ﻿using Elevator.Models;
 
-namespace Elevator.Extand
+namespace Elevator.Extend
 {
     public static class MessageHelper
     {
