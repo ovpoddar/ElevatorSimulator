@@ -29,34 +29,40 @@ namespace Elevator
                     _path.Insert(_path.IndexOf(message.FloorNumber), message.FloorNumber);
             }
             else
-                AddStop(message);
+            {
+                var currentFloor = new int();
+
+                if (_path.Count != 0)
+                    currentFloor = _path[_path.Count - 1];
+                else
+                    currentFloor = _CurrentFloor;
+
+
+                if (message.FloorNumber > currentFloor)
+                    for (var i = currentFloor; i <= message.FloorNumber; i++)
+                        _path.Add(i);
+                else
+                    for (var i = currentFloor; i >= message.FloorNumber; i--)
+                        _path.Add(i);
+                // this one for reaching the destination
+                _path.Add(message.FloorNumber);
+            }
         }
 
-        private void AddStop(Message message)
-        {
-            var currentFloor = CalculateCurrentFloor();
-            if (message.FloorNumber > currentFloor)
-                for (var i = currentFloor; i <= message.FloorNumber; i++)
-                    _path.Add(i);
-            else
-                for (var i = currentFloor; i >= message.FloorNumber; i--)
-                    _path.Add(i);
-            // this one for reaching the destination
-            _path.Add(message.FloorNumber);
-        }
 
-        private int CalculateCurrentFloor()
-        {
-            if (_path.Count != 0)
-                return _path[_path.Count - 1];
-            return _CurrentFloor;
-        }
+
+
 
         public void GoTo()
         {
             try
             {
-                CalculateDirection();
+                if (_path[0] < _path[1])
+                    direction = Direction.Down;
+                else if (_path[0] > _path[1])
+                    direction = Direction.Up;
+                else
+                    direction = Direction.Stop;
                 IsMoved.Raise(this, _path[0]);
                 _CurrentFloor = _path[0];
                 IsMoving = true;
@@ -70,22 +76,7 @@ namespace Elevator
 
         }
 
-        private void CalculateDirection()
-        {
-            try
-            {
-                if (_path[0] < _path[1])
-                    direction = Direction.Down;
-                else if (_path[0] > _path[1])
-                    direction = Direction.Up;
-                else
-                    direction = Direction.Stop;
-            }
-            catch
-            {
-                direction = Direction.Stop;
-            }
-        }
+
     }
 
 }
