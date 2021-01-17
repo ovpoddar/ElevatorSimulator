@@ -49,20 +49,11 @@ namespace Elevator
             }
         }
 
-
-
-
-
         public void GoTo()
         {
             try
             {
-                if (_path[0] < _path[1])
-                    direction = Direction.Down;
-                else if (_path[0] > _path[1])
-                    direction = Direction.Up;
-                else
-                    direction = Direction.Stop;
+                CalculateDirection();
                 IsMoved.Raise(this, _path[0]);
                 _CurrentFloor = _path[0];
                 IsMoving = true;
@@ -74,6 +65,23 @@ namespace Elevator
                 direction = Direction.Stop;
             }
 
+        }
+
+        public void CalculateDirection()
+        {
+            try
+            {
+                if (_path[0] < _path[1])
+                    direction = Direction.Down;
+                else if (_path[0] > _path[1])
+                    direction = Direction.Up;
+                else
+                    direction = Direction.Stop;
+            }
+            catch
+            {
+                direction = Direction.Stop;
+            }
         }
 
 
