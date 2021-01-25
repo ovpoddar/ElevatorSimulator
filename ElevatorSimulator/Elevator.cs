@@ -46,7 +46,7 @@ namespace Elevator.UI
             _clientSocket = _serverSocket.EndAccept(ar);
             _buffer = new byte[_clientSocket.ReceiveBufferSize];
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
-            ConnectingSarver(); 
+            ConnectingSarver();
         }
 
         private void ReceiveCallback(IAsyncResult ar)
@@ -103,9 +103,10 @@ namespace Elevator.UI
             var button = (Button)sender;
             var name = button.Name.ToString();
             var decodeName = "";
-            if (name == "T-Down")
-                decodeName = "0-Up";
-            decodeName = "4-Down";
+            if ("T-Down" == name)
+                decodeName = "0-Down";
+            else
+                decodeName = "4-Up";
             var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);
