@@ -30,10 +30,5 @@ namespace Elevator.UI.CustomeComponents
             }
             CurrentFloor = floor;
         }
-
-        internal void Stop(int floorNumber)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -33,7 +33,9 @@ namespace Elevator
             else
             {
                 var currentFloor = _path.Count != 0 ? _path[_path.Count - 1] : _CurrentFloor;
-                if (message.FloorNumber > currentFloor)
+                if (currentFloor == message.FloorNumber)
+                    return;
+                else if (message.FloorNumber > currentFloor)
                     for (var i = currentFloor; i <= message.FloorNumber; i++)
                         _path.Add(i);
                 else

@@ -63,10 +63,10 @@ namespace Elevator.UI
             {
                 Task.Run(() =>
                 {
-                    if (string.Equals(message.Direction, "Stop"))
-                        _lift.Stop(message.FloorNumber);
                     _lift.updatepos(message.FloorNumber);
                     Thread.Sleep(4000);
+                    if (string.Equals(message.Direction, "Stop"))
+                        ShowStoptoFloor(message.FloorNumber).Stop();
                     _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
                 });
             });
@@ -82,6 +82,21 @@ namespace Elevator.UI
 
             _clientSocket.Send(floorEnc);
 
+        }
+
+        private Floor ShowStoptoFloor(int floorNumber)
+        {
+            var result = new object();
+
+            if (floorNumber == 0)
+                result = TopFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else if (floorNumber == LiftInside.Controls.OfType<Button>().Count())
+                result = BottomFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else
+                foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
+                    if (floor.Name == floorNumber.ToString())
+                        result = floor;
+            return (Floor)result;
         }
 
         private void InitializeMethods()
@@ -106,11 +121,7 @@ namespace Elevator.UI
         {
             var button = (Button)sender;
             var name = button.Name.ToString();
-            var decodeName = "";
-            if ("T-Down" == name)
-                decodeName = "0-Down";
-            else
-                decodeName = "4-Up";
+            var decodeName = "T-Down" == name ? "0-Down" : "4-Up";
             var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);
