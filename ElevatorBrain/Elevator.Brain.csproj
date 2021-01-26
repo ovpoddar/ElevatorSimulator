@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elevato\Elevator.csproj" />
+    <ProjectReference Include="..\Elevator.Shared\Elevator.Shared.csproj" />
+    <ProjectReference Include="..\Elevator.UI\Elevator.UI.csproj" />
   </ItemGroup>
 
 </Project>
