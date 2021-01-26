@@ -63,17 +63,35 @@ namespace Elevator.UI
             {
                 Task.Run(() =>
                 {
-                    if (string.Equals(message.Direction, "Stop"))
-                        _lift.Stop(message.FloorNumber);
                     _lift.updatepos(message.FloorNumber);
-                    Thread.Sleep(4000);
+                    if (string.Equals(message.Direction, "Stop"))
+                    {
+                        var floor = DecodeFloor(message.FloorNumber);
+                        Thread.Sleep(1000);
+                        floor.Stop();
+                        Thread.Sleep(4000);
+                        floor.Stop();
+
+                    }
+                    Thread.Sleep(2000);
                     _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
                 });
             });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }
 
-
+        private Floor DecodeFloor(int floorNumber)
+        {
+            if (floorNumber == 0)
+                return TopFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else if (floorNumber == (LiftInside.Controls.OfType<Button>().Count() - 1))
+                return BottomFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else
+                foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
+                    if (floor.Name == floorNumber.ToString())
+                        return floor;
+            return null;
+        }
         private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -106,11 +124,7 @@ namespace Elevator.UI
         {
             var button = (Button)sender;
             var name = button.Name.ToString();
-            var decodeName = "";
-            if ("T-Down" == name)
-                decodeName = "0-Down";
-            else
-                decodeName = "4-Up";
+            var decodeName = "T-Down" == name ? "0-Down" : "4-Up";
             var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);
