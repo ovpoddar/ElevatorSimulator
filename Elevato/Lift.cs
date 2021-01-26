@@ -1,4 +1,5 @@
 ﻿using Elevator.Extend;
+using Elevator.Extend.Model;
 using Elevator.Models;
 using System;
 using System.Collections.Generic;
@@ -30,14 +31,7 @@ namespace Elevator
             }
             else
             {
-                var currentFloor = new int();
-
-                if (_path.Count != 0)
-                    currentFloor = _path[_path.Count - 1];
-                else
-                    currentFloor = _CurrentFloor;
-
-
+                var currentFloor = _path.Count != 0 ? _path[_path.Count - 1] : (_CurrentFloor + 1);
                 if (message.FloorNumber > currentFloor)
                     for (var i = currentFloor; i <= message.FloorNumber; i++)
                         _path.Add(i);

@@ -25,7 +25,11 @@ namespace Elevator.Brain
         {
             var messa = e + "  " + _lift.direction;
             listBox1.Items.Add(messa);
-            sendMessage(e.ToString());
+
+            if(_lift.direction == Models.Direction.Stop)
+                sendMessage(messa);
+            else
+                sendMessage(e.ToString());
         }
 
         private void ConnectToSarver()

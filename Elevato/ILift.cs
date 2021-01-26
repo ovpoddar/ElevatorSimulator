@@ -1,4 +1,5 @@
-﻿using Elevator.Models;
+﻿using Elevator.Extend.Model;
+using Elevator.Models;
 
 namespace Elevator
 {
