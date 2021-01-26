@@ -1,5 +1,7 @@
-﻿using Elevator.UI.CustomeComponents;
+﻿using Elevator.Extend;
+using Elevator.UI.CustomeComponents;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -46,7 +48,7 @@ namespace Elevator.UI
             _clientSocket = _serverSocket.EndAccept(ar);
             _buffer = new byte[_clientSocket.ReceiveBufferSize];
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
-            ConnectingSarver(); 
+            ConnectingSarver();
         }
 
         private void ReceiveCallback(IAsyncResult ar)
@@ -56,20 +58,40 @@ namespace Elevator.UI
             if (received == 0)
                 return;
 
-            var message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
+            var message = MessageHelper.ParseMessage((Encoding.ASCII.GetString(_buffer, 0, received)));
             Invoke((Action)delegate
             {
                 Task.Run(() =>
                 {
-                    _lift.updatepos(message);
-                    Thread.Sleep(4000);
+                    _lift.updatepos(message.FloorNumber);
+                    if (string.Equals(message.Direction, "Stop"))
+                    {
+                        var floor = DecodeFloor(message.FloorNumber);
+                        Thread.Sleep(1000);
+                        floor.Stop();
+                        Thread.Sleep(4000);
+                        floor.Stop();
+
+                    }
+                    Thread.Sleep(2000);
                     _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
                 });
             });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }
 
-
+        private Floor DecodeFloor(int floorNumber)
+        {
+            if (floorNumber == 0)
+                return TopFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else if (floorNumber == (LiftInside.Controls.OfType<Button>().Count() - 1))
+                return BottomFloorHolder.Controls.OfType<Floor>().ToList()[0];
+            else
+                foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
+                    if (floor.Name == floorNumber.ToString())
+                        return floor;
+            return null;
+        }
         private void Btn_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -102,10 +124,7 @@ namespace Elevator.UI
         {
             var button = (Button)sender;
             var name = button.Name.ToString();
-            var decodeName = "";
-            if (name == "T-Down")
-                decodeName = "0-Up";
-            decodeName = "4-Down";
+            var decodeName = "T-Down" == name ? "0-Down" : "4-Up";
             var floorEnc = Encoding.ASCII.GetBytes(decodeName);
 
             _clientSocket.Send(floorEnc);

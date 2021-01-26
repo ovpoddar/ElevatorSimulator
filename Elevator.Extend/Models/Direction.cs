@@ -1,4 +1,4 @@
-﻿namespace Elevator.Models
+﻿namespace Elevator.Extend
 {
     public enum Direction
     {
