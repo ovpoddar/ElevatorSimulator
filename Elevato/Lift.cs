@@ -26,21 +26,24 @@ namespace Elevator
             if (_path.Contains(message.FloorNumber))
             {
                 if (message.Direction == direction.ToString() || message.Direction == "Go")
-                    _path.Insert(_path.IndexOf(message.FloorNumber), message.FloorNumber);
+                    // this one for reaching the destination
+                    // and also the destination
+                    _path.InsertRange(_path.IndexOf(message.FloorNumber), new List<int> { message.FloorNumber, message.FloorNumber });
             }
             else
             {
                 var currentFloor = _path.Count != 0 ? _path[_path.Count - 1] : _CurrentFloor;
-
                 if (currentFloor == message.FloorNumber)
                     return;
                 else if (message.FloorNumber > currentFloor)
-                    for (var i = currentFloor +1; i <= message.FloorNumber; i++)
+                    for (var i = currentFloor; i <= message.FloorNumber; i++)
                         _path.Add(i);
                 else
-                    for (var i = currentFloor - 1; i >= message.FloorNumber; i--)
+                    for (var i = currentFloor; i >= message.FloorNumber; i--)
                         _path.Add(i);
 
+                // this one for reaching the destination
+                _path.Add(message.FloorNumber);
             }
         }
 
