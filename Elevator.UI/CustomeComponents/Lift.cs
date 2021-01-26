@@ -6,7 +6,6 @@ namespace Elevator.UI.CustomeComponents
     public partial class Lift : UserControl
     {
         private readonly int _height;
-        public int CurrentFloor { get; set; }
 
         public Lift(int height)
         {
@@ -28,7 +27,6 @@ namespace Elevator.UI.CustomeComponents
                     this.Top = floor * _height;
                 });
             }
-            CurrentFloor = floor;
         }
     }
 }
