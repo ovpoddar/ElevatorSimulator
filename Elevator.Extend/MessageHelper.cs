@@ -11,5 +11,8 @@ namespace Elevator.Extend
                 Direction = message.Split((char)'-')[1],
                 FloorNumber = int.Parse(message.Split((char)'-')[0])
             };
+
+        public static string ComcomposeMessage(int floor, string direction) =>
+            $"{floor}-{direction}";
     }
 }

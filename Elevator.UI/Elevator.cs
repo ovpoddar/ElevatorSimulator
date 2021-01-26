@@ -1,5 +1,7 @@
-﻿using Elevator.UI.CustomeComponents;
+﻿using Elevator.Extend;
+using Elevator.UI.CustomeComponents;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -56,12 +58,14 @@ namespace Elevator.UI
             if (received == 0)
                 return;
 
-            var message = int.Parse(Encoding.ASCII.GetString(_buffer, 0, received));
+            var message = MessageHelper.ParseMessage((Encoding.ASCII.GetString(_buffer, 0, received)));
             Invoke((Action)delegate
             {
                 Task.Run(() =>
                 {
-                    _lift.updatepos(message);
+                    if (string.Equals(message.Direction, "Stop"))
+                        _lift.Stop(message.FloorNumber);
+                    _lift.updatepos(message.FloorNumber);
                     Thread.Sleep(4000);
                     _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
                 });
