@@ -23,9 +23,9 @@ namespace Elevator.Brain
 
         private void LiftMoved(object sender, int e)
         {
-            var messa = e + "  " + _lift.direction;
-            listBox1.Items.Add(messa);
-            sendMessage(e.ToString());
+            var message = MessageHelper.ComcomposeMessage(e, _lift.direction.ToString());
+            listBox1.Items.Add(message);
+            sendMessage(message);
         }
 
         private void ConnectToSarver()

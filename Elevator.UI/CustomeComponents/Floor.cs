@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Elevator.UI.CustomeComponents
@@ -28,6 +29,10 @@ namespace Elevator.UI.CustomeComponents
             this.Down.Visible = _bottom;
             this.Up.Name = $"{_name}-Up";
             this.Down.Name = $"{_name}-Down";
+            this.Name = _name;
         }
+
+        public void Stop() =>
+            this.BackColor = this.BackColor == SystemColors.ControlDarkDark ? Color.Yellow : SystemColors.ControlDarkDark;
     }
 }

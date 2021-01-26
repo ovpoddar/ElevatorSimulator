@@ -1,4 +1,8 @@
-﻿namespace Elevator.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Elevator.Extend.Model
 {
     public class Message
     {

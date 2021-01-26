@@ -6,4 +6,8 @@
     <AssemblyName>Elevator</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Elevator.Extend\Elevator.Extend.csproj" />
+  </ItemGroup>
+
 </Project>
