@@ -38,10 +38,8 @@ namespace Elevator.UI
             ConnectingSarver();
         }
 
-        private void ConnectingSarver()
-        {
+        private void ConnectingSarver() =>
             _serverSocket.BeginAccept(AcceptCallback, null);
-        }
 
         private void AcceptCallback(IAsyncResult ar)
         {
@@ -63,26 +61,20 @@ namespace Elevator.UI
             {
                 Task.Run(() =>
                 {
-                    _lift.updatepos(message.FloorNumber);
+                    _lift.Updatepos(message.FloorNumber);
                     Thread.Sleep(4000);
+
                     if (string.Equals(message.Direction, "Stop"))
                         ShowStoptoFloor(message.FloorNumber).Stop();
-                    _clientSocket.Send(Encoding.ASCII.GetBytes("Done"));
+                    Send("Done");
                 });
             });
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
         }
 
 
-        private void Btn_Click(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-
-            var floorEnc = Encoding.ASCII.GetBytes($"{button.Text}-Go");
-
-            _clientSocket.Send(floorEnc);
-
-        }
+        private void Btn_Click(object sender, EventArgs e) =>
+            Send($"{((Button)sender).Text}-Go");
 
         private Floor ShowStoptoFloor(int floorNumber)
         {
@@ -96,6 +88,7 @@ namespace Elevator.UI
                 foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
                     if (floor.Name == floorNumber.ToString())
                         result = floor;
+
             return (Floor)result;
         }
 
@@ -108,40 +101,29 @@ namespace Elevator.UI
                 foreach (var button in floor.Controls.OfType<Button>())
                     button.Click += DirBtnClick;
 
-            foreach (var floor in TopFloorHolder.Controls.OfType<Floor>())
-                foreach (var button in floor.Controls.OfType<Button>())
-                    button.Click += CustomClick;
+            foreach (var button in TopFloorHolder.Controls.OfType<Floor>().ToList()[0].Controls.OfType<Button>())
+                button.Click += CustomClick;
 
-            foreach (var floor in BottomFloorHolder.Controls.OfType<Floor>())
-                foreach (var button in floor.Controls.OfType<Button>())
-                    button.Click += CustomClick;
+            foreach (var button in BottomFloorHolder.Controls.OfType<Floor>().ToList()[0].Controls.OfType<Button>())
+                button.Click += CustomClick;
         }
 
-        private void CustomClick(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var name = button.Name.ToString();
-            var decodeName = "T-Down" == name ? "0-Down" : "4-Up";
-            var floorEnc = Encoding.ASCII.GetBytes(decodeName);
-
-            _clientSocket.Send(floorEnc);
-        }
+        private void CustomClick(object sender, EventArgs e) =>
+            Send("T-Down" == ((Button)sender).Name.ToString()
+                ? "0-Down"
+                : "4-Up");
 
 
-        private void DirBtnClick(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
+        private void DirBtnClick(object sender, EventArgs e) =>
+            Send(((Button)sender).Name.ToString());
 
-            var floorEnc = Encoding.ASCII.GetBytes(button.Name.ToString());
-
-            _clientSocket.Send(floorEnc);
-        }
+        private void Send(string message) =>
+            _clientSocket.Send(Encoding.ASCII.GetBytes(message));
 
         private void InitializeDynamicComponent()
         {
-            var totalHeight = panel3.Height;
             var totalButtons = LiftInside.Controls.OfType<Button>().Count();
-            var height = totalHeight / totalButtons;
+            var height = panel3.Height / totalButtons;
             for (int i = 0; i < totalButtons - 2; i++)
                 DynamicFloorHolder.Controls.Add(new Floor(height, true, true, $"{i + 1}"));
             DynamicFloorHolder.Height = height * (totalButtons - 2);
@@ -153,13 +135,12 @@ namespace Elevator.UI
 
         private void InitializeLift()
         {
-            var totalHeight = panel3.Height;
             var totalButtons = LiftInside.Controls.OfType<Button>().Count();
-            var height = totalHeight / totalButtons;
+            var height = panel3.Height / totalButtons;
             _lift = new Lift(height);
             panel2.Controls.Add(_lift);
 
-            _lift.updatepos(totalButtons - 1);
+            _lift.Updatepos(totalButtons - 1);
         }
     }
 }

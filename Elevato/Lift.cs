@@ -17,7 +17,7 @@ namespace Elevator
 
         public Lift()
         {
-            _CurrentFloor = 3;
+            _CurrentFloor = 4;
             _path = new List<int>();
         }
 

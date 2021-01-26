@@ -60,9 +60,7 @@ namespace Elevator.Brain
         }
 
 
-        private void sendMessage(string Message)
-        {
+        private void sendMessage(string Message) =>
             _clientSocket.Send(Encoding.ASCII.GetBytes(Message));
-        }
     }
 }
