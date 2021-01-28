@@ -6,6 +6,5 @@ namespace Elevator
     {
         void GoTo();
         void Request(Message message);
-        void CalculateDirection();
     }
 }

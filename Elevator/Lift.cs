@@ -1,7 +1,9 @@
 ﻿using Elevator.Extend;
 using Elevator.Extend.Model;
+using Elevator.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Elevator
 {
@@ -9,6 +11,7 @@ namespace Elevator
     {
         private int _CurrentFloor;
         private readonly List<int> _path;
+        private readonly LiftHelper _liftHelper;
 
         public volatile bool IsMoving;
         public volatile Direction direction;
@@ -19,16 +22,18 @@ namespace Elevator
         {
             _CurrentFloor = 4;
             _path = new List<int>();
+            _liftHelper = new LiftHelper();
         }
 
         public void Request(Message message)
         {
             if (_path.Contains(message.FloorNumber))
             {
-                if (message.Direction == direction.ToString() || message.Direction == "Go")
+                if (message.Direction == direction.ToString() || message.Direction == "Go" && _liftHelper.liftcount(_path, message.FloorNumber) < 2)
                     // this one for reaching the destination
                     // and also the destination
                     _path.InsertRange(_path.IndexOf(message.FloorNumber), new List<int> { message.FloorNumber, message.FloorNumber });
+
             }
             else
             {
@@ -51,7 +56,7 @@ namespace Elevator
         {
             try
             {
-                CalculateDirection();
+                direction = _liftHelper.CalculateDirection(_path);
                 IsMoved.Raise(this, _path[0]);
                 _CurrentFloor = _path[0];
                 IsMoving = true;
@@ -63,23 +68,6 @@ namespace Elevator
                 direction = Direction.Stop;
             }
 
-        }
-
-        public void CalculateDirection()
-        {
-            try
-            {
-                if (_path[0] < _path[1])
-                    direction = Direction.Down;
-                else if (_path[0] > _path[1])
-                    direction = Direction.Up;
-                else
-                    direction = Direction.Stop;
-            }
-            catch
-            {
-                direction = Direction.Stop;
-            }
         }
 
     }
