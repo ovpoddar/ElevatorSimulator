@@ -22,17 +22,17 @@ namespace Elevator.UI.CustomeComponents
 
         private void Floor_Load(object sender, EventArgs e)
         {
-            this.Height = _height;
-            this.Up.Enabled = _top;
-            this.Down.Enabled = _bottom;
-            this.Up.Visible = _top;
-            this.Down.Visible = _bottom;
-            this.Up.Name = $"{_name}-Up";
-            this.Down.Name = $"{_name}-Down";
-            this.Name = _name;
+            Height = _height;
+            Up.Enabled = _top;
+            Down.Enabled = _bottom;
+            Up.Visible = _top;
+            Down.Visible = _bottom;
+            Up.Name = $"{_name}-Up";
+            Down.Name = $"{_name}-Down";
+            Name = _name;
         }
 
         public void Stop() =>
-            this.BackColor = this.BackColor == SystemColors.ControlDarkDark ? Color.Yellow : SystemColors.ControlDarkDark;
+            BackColor = BackColor == SystemColors.ControlDarkDark ? Color.Yellow : SystemColors.ControlDarkDark;
     }
 }

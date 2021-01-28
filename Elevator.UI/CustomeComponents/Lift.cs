@@ -11,20 +11,20 @@ namespace Elevator.UI.CustomeComponents
         {
             _height = height;
             InitializeComponent();
-            this.Height = _height;
+            Height = _height;
         }
 
-        public void Updatepos(int floor)
+        public void UpdatePosition(int floor)
         {
             try
             {
-                this.Top = floor * _height;
+                Top = floor * _height;
             }
             catch
             {
                 Invoke((Action)delegate
                 {
-                    this.Top = floor * _height;
+                    Top = floor * _height;
                 });
             }
         }

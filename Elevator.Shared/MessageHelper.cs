@@ -1,5 +1,4 @@
 ﻿using Elevator.Extend.Model;
-using System;
 
 namespace Elevator.Extend
 {
@@ -12,7 +11,7 @@ namespace Elevator.Extend
                 FloorNumber = int.Parse(message.Split((char)'-')[0])
             };
 
-        public static string ComcomposeMessage(int floor, string direction) =>
+        public static string ComposeMessage(int floor, string direction) =>
             $"{floor}-{direction}";
     }
 }

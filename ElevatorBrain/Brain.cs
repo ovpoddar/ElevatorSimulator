@@ -23,7 +23,7 @@ namespace Elevator.Brain
 
         private void LiftMoved(object sender, int e)
         {
-            var message = MessageHelper.ComcomposeMessage(e, _lift.direction.ToString());
+            var message = MessageHelper.ComposeMessage(e, _lift.Direction.ToString());
             listBox1.Items.Add(message);
             sendMessage(message);
         }

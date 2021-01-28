@@ -1,7 +1,6 @@
 ﻿using Elevator.Extend;
 using Elevator.UI.CustomeComponents;
 using System;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -19,7 +18,6 @@ namespace Elevator.UI
         private Socket _clientSocket;
         private byte[] _buffer;
 
-
         public Elevator()
         {
             InitializeComponent();
@@ -35,10 +33,10 @@ namespace Elevator.UI
             _serverSocket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3333));
             _serverSocket.Listen(10);
 
-            ConnectingSarver();
+            ConnectingServer();
         }
 
-        private void ConnectingSarver() =>
+        private void ConnectingServer() =>
             _serverSocket.BeginAccept(AcceptCallback, null);
 
         private void AcceptCallback(IAsyncResult ar)
@@ -46,12 +44,12 @@ namespace Elevator.UI
             _clientSocket = _serverSocket.EndAccept(ar);
             _buffer = new byte[_clientSocket.ReceiveBufferSize];
             _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
-            ConnectingSarver();
+            ConnectingServer();
         }
 
-        private void ReceiveCallback(IAsyncResult ar)
+        private void ReceiveCallback(IAsyncResult messageAsyncResult)
         {
-            var received = _clientSocket.EndReceive(ar);
+            var received = _clientSocket.EndReceive(messageAsyncResult);
 
             if (received == 0)
                 return;
@@ -61,11 +59,11 @@ namespace Elevator.UI
             {
                 Task.Run(() =>
                 {
-                    _lift.Updatepos(message.FloorNumber);
+                    _lift.UpdatePosition(message.FloorNumber);
                     Thread.Sleep(4000);
 
                     if (string.Equals(message.Direction, "Stop"))
-                        ShowStoptoFloor(message.FloorNumber).Stop();
+                        ShowStopToFloor(message.FloorNumber).Stop();
                     Send("Done");
                 });
             });
@@ -76,7 +74,7 @@ namespace Elevator.UI
         private void Btn_Click(object sender, EventArgs e) =>
             Send($"{((Button)sender).Text}-Go");
 
-        private Floor ShowStoptoFloor(int floorNumber)
+        private Floor ShowStopToFloor(int floorNumber)
         {
             var result = new object();
             if (floorNumber == 0)
@@ -123,7 +121,7 @@ namespace Elevator.UI
         {
             var totalButtons = LiftInside.Controls.OfType<Button>().Count();
             var height = panel3.Height / totalButtons;
-            for (int i = 0; i < totalButtons - 2; i++)
+            for (var i = 0; i < totalButtons - 2; i++)
                 DynamicFloorHolder.Controls.Add(new Floor(height, true, true, $"{i + 1}"));
             DynamicFloorHolder.Height = height * (totalButtons - 2);
             TopFloorHolder.Controls.Add(new Floor(height, false, true, "T"));
@@ -139,7 +137,7 @@ namespace Elevator.UI
             _lift = new Lift(height);
             panel2.Controls.Add(_lift);
 
-            _lift.Updatepos(totalButtons - 1);
+            _lift.UpdatePosition(totalButtons - 1);
         }
     }
 }
