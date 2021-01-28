@@ -33,7 +33,7 @@ namespace Elevator
             else
             {
                 var currentFloor = _path.Count != 0 ? _path[_path.Count - 1] : _CurrentFloor;
-                if (message.FloorNumber == currentFloor && message.Direction == "Go")
+                if (message.FloorNumber == currentFloor)
                     return;
                 else if (message.FloorNumber > currentFloor)
                     for (var i = currentFloor; i <= message.FloorNumber; i++)
