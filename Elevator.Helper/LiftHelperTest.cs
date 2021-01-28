@@ -2,7 +2,7 @@ using Elevator.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace Elevator.Helper
+namespace Elevator.Helper.Test
 {
     [TestClass]
     public class LiftHelperTest
