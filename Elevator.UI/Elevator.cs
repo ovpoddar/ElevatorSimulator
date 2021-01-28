@@ -136,7 +136,6 @@ namespace Elevator.UI
             var height = panel3.Height / totalButtons;
             _lift = new Lift(height);
             panel2.Controls.Add(_lift);
-
             _lift.UpdatePosition(totalButtons - 1);
         }
     }
