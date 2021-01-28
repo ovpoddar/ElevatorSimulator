@@ -28,7 +28,7 @@ namespace Elevator
         public void Request(Message message)
         {
             if (_path.Contains(message.FloorNumber) && _liftHelper.liftcount(_path, message.FloorNumber) < 2 && (message.Direction == direction.ToString() || message.Direction == "Go"))
-                    _path.InsertRange(_path.IndexOf(message.FloorNumber), new List<int> { message.FloorNumber, message.FloorNumber });
+                _path.InsertRange(_path.IndexOf(message.FloorNumber), new List<int> { message.FloorNumber, message.FloorNumber });
             else
             {
                 var currentFloor = _path.Count != 0 ? _path[^1] : _CurrentFloor;
