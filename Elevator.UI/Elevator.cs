@@ -79,10 +79,9 @@ namespace Elevator.UI
         private Floor ShowStoptoFloor(int floorNumber)
         {
             var result = new object();
-
             if (floorNumber == 0)
                 result = TopFloorHolder.Controls.OfType<Floor>().ToList()[0];
-            else if (floorNumber == LiftInside.Controls.OfType<Button>().Count())
+            else if (floorNumber == (LiftInside.Controls.OfType<Button>().Count() -1))
                 result = BottomFloorHolder.Controls.OfType<Floor>().ToList()[0];
             else
                 foreach (var floor in DynamicFloorHolder.Controls.OfType<Floor>())
