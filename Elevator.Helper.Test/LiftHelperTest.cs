@@ -1,10 +1,10 @@
 using Elevator.Helpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using Xunit;
 
 namespace Elevator.Helper.Test
 {
-    [TestClass]
     public class LiftHelperTest
     {
         private readonly LiftHelper _liftHelper;
@@ -12,7 +12,7 @@ namespace Elevator.Helper.Test
         {
             _liftHelper = new LiftHelper();
         }
-        [TestMethod]
+        [Fact]
         public void CustomCountsTest()
         {
             var list = new List<int>()
@@ -22,9 +22,8 @@ namespace Elevator.Helper.Test
 
             var result = _liftHelper.CustomCount(list, 2);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(list.Count, 7);
-            Assert.AreEqual(result, 5);
+            Assert.Equal(7, list.Count);
+            Assert.Equal(5, result);
         }
     }
 }
