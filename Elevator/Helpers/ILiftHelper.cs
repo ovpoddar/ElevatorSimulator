@@ -6,6 +6,6 @@ namespace Elevator.Helpers
     public interface ILiftHelper
     {
         Direction CalculateDirection(List<int> path);
-        int liftcount(List<int> path, int floorNumber);
+        bool StopCount(List<int> path, int floorNumber);
     }
 }

@@ -2,21 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Elevator.Helpers
 {
     public class LiftHelper : ILiftHelper
     {
-        public int liftcount(List<int> path, int floorNumber)
-        {
-            var count = 0;
-            foreach (var item in path)
-            {
-                if (item == floorNumber)
-                    count++;
-            }
-            return count;
-        }
+        public bool StopCount(List<int> path, int floorNumber) =>
+            path.Where(item => item == floorNumber)
+            .Count() < 2;
 
         public Direction CalculateDirection(List<int> path)
         {
