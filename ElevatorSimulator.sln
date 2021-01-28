@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elevator.Shared", "Elevator
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elevator", "Elevator\Elevator.csproj", "{24C8075A-6EF3-47D1-94E5-DE85A6C4A40A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elevator.Helper.Test", "Elevator.Helper\Elevator.Helper.Test.csproj", "{1D898F82-4B78-41D7-98B2-42233A96A6E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elevator.Helper.Test", "Elevator.Helper.Test\Elevator.Helper.Test.csproj", "{8D551FC2-143E-428E-846E-2396DF373259}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{24C8075A-6EF3-47D1-94E5-DE85A6C4A40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C8075A-6EF3-47D1-94E5-DE85A6C4A40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C8075A-6EF3-47D1-94E5-DE85A6C4A40A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D898F82-4B78-41D7-98B2-42233A96A6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D898F82-4B78-41D7-98B2-42233A96A6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D898F82-4B78-41D7-98B2-42233A96A6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D898F82-4B78-41D7-98B2-42233A96A6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D551FC2-143E-428E-846E-2396DF373259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D551FC2-143E-428E-846E-2396DF373259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D551FC2-143E-428E-846E-2396DF373259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D551FC2-143E-428E-846E-2396DF373259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
