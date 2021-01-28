@@ -8,10 +8,12 @@ namespace Elevator.Helper.Test
     public class LiftHelperTest
     {
         private readonly LiftHelper _liftHelper;
+
         public LiftHelperTest()
         {
             _liftHelper = new LiftHelper();
         }
+
         [Fact]
         public void CustomCountsTest()
         {
